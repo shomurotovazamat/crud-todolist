@@ -1,12 +1,15 @@
+let idCounter = 1;
 const tasks = [];
 
 exports.create = (body) => {
     const task = {
-        id: Date.now(),
+        id: idCounter,
         text: body.text,
         done: false
     }
+    idCounter++;
     tasks.push(task);
+    return tasks;
 }
 
 exports.read = () => {
@@ -14,7 +17,7 @@ exports.read = () => {
 }
 
 exports.update = (id, body) => {
-    const task = tasks.find((task) => task.id === id);
+    const task = tasks.find((one) => one.id === id);
     if (task) {
         task.text = body.text;
         task.done = body.done;
